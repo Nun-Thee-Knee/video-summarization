@@ -1,9 +1,8 @@
 import requests
 
-# Define your Gemini AI API key
+#Gemini AI API key (according to 22.02.2024)
 API_KEY = "AIzaSyBS1VrouiC3h6hO1a167SNVUaJVcd_1ijU"
 
-# Function to summarize a video using Gemini AI
 def summarize_video(video_url):
     url = "https://api.gemini.ai/v1/summarize/video"
 
