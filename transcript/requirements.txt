@@ -1,0 +1,7 @@
+Modules that are required to run the file:
+1. Anaconda environment- Accepts conda arguments on cmd
+2. youtube_transcript_api
+3. streamlit
+4. google-generativeai
+5. python-dotenv
+6. pathlib
