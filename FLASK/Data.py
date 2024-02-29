@@ -5,6 +5,7 @@ genai.configure(api_key="AIzaSyA-luIl_5FNZ0tyTlrQ0wWTHyXW-iQBcqI")
 
 class Data:
     def __init__(self, link):
+        self.title = None
         self.link = link
         self.text = None
         self.transcript = None
@@ -19,7 +20,6 @@ class Data:
         except Exception as e:
             error = type(e).__name__
             self.message.append({error: "You have provided a wrong YouTube link"})
-            return self.message
 
     def transcript_fetcher(self):
         try:
@@ -34,7 +34,7 @@ class Data:
                 self.message.append({error: "Language is not supported for this video"})
             else:
                 self.message.append({error: "Error faced while fetching the transcript"})
-            return self.message
+
 
     def generate_gemini_content(self, transcript_text, prompt):
         model = genai.GenerativeModel("gemini-pro")
@@ -47,13 +47,16 @@ class Data:
         if transcript_text:
             prompt = "This is a YouTube transcript summarizer, which will provide a brief summary of about 250 words depending on the transcript shared"
             self.summary = self.generate_gemini_content(transcript_text, prompt)
+            prompt = "Can you give a title for the summary "
+            self.title = self.generate_gemini_content(self.summary, prompt)
 
     def summarization(self):
         self.summarize_youtube_transcript()
         if not self.message:
             self.data = {
                 "transcript": self.text,
-                "summarized_text": self.summary
+                "summarized_text": self.summary,
+                "title": self.title
             }
             return self.data
         else:

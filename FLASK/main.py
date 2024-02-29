@@ -1,8 +1,27 @@
+from flask import Flask, request, jsonify
 from Data import Data
-import json
 
+app = Flask(__name__)
 
-link = "https://youtu.be/ZHpKvmTJOhA?feature=shared"
-data = Data(link)
-data.video_link_check()
-print(data.message)
+def data_fetcher(link):
+    data = Data(link)
+    data.video_link_check()
+    if data.message:
+        return jsonify({"error": data.message})
+    else:
+        return jsonify(data.data)
+
+@app.route("/", methods=["POST"])
+def main():
+    if request.method == "POST":
+        if "link" not in request.json:
+            return jsonify({"message": "You have not provided correct arguments"})
+        else:
+            link = request.json['link']
+            result = data_fetcher(link)
+            return result
+    else:
+        return jsonify({"message": "Method is not allowed"})
+
+if __name__ == "__main__":
+    app.run(debug=True)
