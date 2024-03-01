@@ -18,7 +18,7 @@ class Data:
             self.video_id = self.link.split("/")[3].split("?")[0].strip()
             self.transcript_fetcher()
         except Exception as e:
-            error = type(e).__name__
+            error = "message"
             self.message.append({error: "You have provided a wrong YouTube link"})
 
     def transcript_fetcher(self):
@@ -27,7 +27,7 @@ class Data:
             self.text = " ".join([entry['text'] for entry in self.transcript])
             self.summarization()
         except Exception as e:
-            error = type(e).__name__
+            error = "message"
             if error == "TranscriptsDisabled":
                 self.message.append({error: "Subtitles for this link are disabled"})
             elif error == "NoTranscriptFound":
@@ -45,7 +45,7 @@ class Data:
         transcript_text = self.text
 
         if transcript_text:
-            prompt = "This is a YouTube transcript summarizer, which will provide a brief summary of about 250 words depending on the transcript shared"
+            prompt = "This is a YouTube transcript summarizer, which will provide a brief summary of less words depending on the transcript shared"
             self.summary = self.generate_gemini_content(transcript_text, prompt)
             prompt = "Can you give a title for the summary "
             self.title = self.generate_gemini_content(self.summary, prompt)
@@ -60,5 +60,5 @@ class Data:
             }
             return self.data
         else:
-            self.message.append({"TranscriptUnavailable": "Summarization is impossible for unavailable transcripts"})
+            self.message.append({"message": "TranscriptUnavailable Summarization is impossible for unavailable transcripts"})
             return self.message
