@@ -45,7 +45,7 @@ class Data:
         transcript_text = self.text
 
         if transcript_text:
-            prompt = "This is a YouTube transcript summarizer, which will provide a brief summary of less words depending on the transcript shared"
+            prompt = "This is a YouTube transcript summarizer, which will provide summary depending on the transcript shared"
             self.summary = self.generate_gemini_content(transcript_text, prompt)
             prompt = "Can you give a title for the summary "
             self.title = self.generate_gemini_content(self.summary, prompt)
