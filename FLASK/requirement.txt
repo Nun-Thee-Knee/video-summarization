@@ -3,5 +3,5 @@ google-ai-generativelanguage==0.4.0
 pathlib==1.0.1
 python-dotenv==1.0.0
 anaconda==0.0.1.1
-flask==3.0.2
-flask_cors==4.0.0
+Flask==2.2.2
+Flask_Cors==4.0.0
