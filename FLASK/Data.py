@@ -1,8 +1,10 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
 
-genai.configure(api_key="AIzaSyA-luIl_5FNZ0tyTlrQ0wWTHyXW-iQBcqI")
-
+load_dotenv()
+genai.configure(api_key=os.getenv('apiKey'))
 class Data:
     def __init__(self, link):
         self.title = None
@@ -45,7 +47,7 @@ class Data:
         transcript_text = self.text
 
         if transcript_text:
-            prompt = "This is a YouTube transcript summarizer, which will provide summary depending on the transcript shared"
+            prompt = "Can you provide detailed notes for the purpose of learning based on the transcripts?"
             self.summary = self.generate_gemini_content(transcript_text, prompt)
             prompt = "Can you give a title for the summary "
             self.title = self.generate_gemini_content(self.summary, prompt)
