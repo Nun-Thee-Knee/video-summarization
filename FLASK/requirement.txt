@@ -1,7 +1,7 @@
 youtube-transcript-api==0.6.2
-google-ai-generativelanguage==0.4.0
+google-ai-generativelanguage==0.5.4
 pathlib==1.0.1
-python-dotenv==1.0.0
+python-dotenv==1.0.1
 anaconda==0.0.1.1
-Flask==2.2.2
-Flask_Cors==4.0.0
+flask==3.0.2
+flask_cors==4.0.0
