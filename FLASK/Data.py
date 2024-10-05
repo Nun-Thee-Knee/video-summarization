@@ -35,6 +35,7 @@ class Data:
             elif error == "NoTranscriptFound":
                 self.message.append({error: "Language is not supported for this video"})
             else:
+                print(e)
                 self.message.append({error: "Error faced while fetching the transcript"})
 
 
